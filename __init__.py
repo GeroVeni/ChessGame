@@ -2,6 +2,7 @@
 
 import pygame
 import sys
+from color import Color
 
 
 # Contstants
@@ -37,8 +38,6 @@ def makeMoves(gameStr):
                 move = ''
             else: move = move + i
     if (adding != 'none'): moves.append(move)
-    log = open("gamestr.log", 'w')
-    for m in moves: log.write(m + '\n')
     return moves
 
 def splitImage(img, hor, ver):
@@ -65,19 +64,20 @@ def update():
 
     if pygame.key.get_pressed()[pygame.K_ESCAPE]: quitGame()
 
+if __name__ == '__main__':
 
-# Initialize window
-pygame.init()
-screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+    # Initialize window
+    pygame.init()
+    screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
-# Load resources
-file = open('resources/PGN/dummy.pgn', 'r')
-moves = makeMoves(file.read())
-img = pygame.image.load('resources/images/pieces.png').convert_alpha()
-piecesImages = splitImage(img, 6, 2)
+    # Load resources
+    file = open('resources/PGN/dummy.pgn', 'r')
+    moves = makeMoves(file.read())
+    img = pygame.image.load('resources/images/pieces.png').convert_alpha()
+    piecesImages = splitImage(img, 6, 2)
 
-# Main loop
-while 1:
-    processEvents()
-    update()
-    render()
+    # Main loop
+    while 1:
+        processEvents()
+        update()
+        render()
