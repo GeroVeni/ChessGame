@@ -1,6 +1,8 @@
 """ Utility functions """
 
 import sys
+from color import *
+from player import *
 
 def quitGame():
     """ Terminates the game """
@@ -41,3 +43,8 @@ def splitImage(img, hor, ver):
     wd = img.get_width() / hor
     ht = img.get_height() / ver
     return [[img.subsurface((i * wd, j * ht, wd, ht)) for j in range(ver)] for i in range(hor)]
+
+def getPlayerColor(player):
+    """ Returns the color the corresponds to that player """
+
+    return Color.black if player == Player.BLACK else Color.white
