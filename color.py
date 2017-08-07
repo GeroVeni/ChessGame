@@ -22,4 +22,6 @@ class Color:
         return self.__repr__()
 
     def isComponentValid(c):
+        """ Checks whether color component values (r,g,b) are in range(0, 255) """
+        
         return 0 <= c and c <= 255
