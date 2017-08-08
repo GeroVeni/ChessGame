@@ -10,11 +10,14 @@ from render import *
 # Constants
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
+DISPLAY_RECT = pygame.Rect((0, 0, WINDOW_WIDTH, WINDOW_HEIGHT))
 BOARD_SIZE = 500
+BOARD_RECT = pygame.Rect((0, 0, BOARD_SIZE, BOARD_SIZE))
 
 
 # Initialize window
 pygame.init()
+# screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 chessBoard = ChessBoard()
 
@@ -23,7 +26,7 @@ file = open('resources/PGN/dummy.pgn', 'r')
 moves = makeMoves(file.read())
 img = pygame.image.load('resources/images/pieces.png').convert_alpha()
 sprites = splitImage(img, 6, 2)
-chessBoardRenderer = ChessBoardRenderer(pygame.Rect((150, 50, BOARD_SIZE, BOARD_SIZE)), screen, sprites)
+chessBoardRenderer = ChessBoardRenderer(centerRect(BOARD_RECT, DISPLAY_RECT), screen, sprites)
 
 # Color.setChessBlack((51, 34, 0))
 # Color.setChessWhite((153, 77, 0))
