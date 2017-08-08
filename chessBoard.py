@@ -28,9 +28,9 @@ class ChessBoard:
         if player == Player.BLACK:
             kingRow = 8
             pawnRow = 7
-        for i in range(1, 9): self.board[pawnRow][i] =  ChessPiece(player, PieceType.P)
-        for i in [1, 8]: self.board[kingRow][i] =       ChessPiece(player, PieceType.R)
-        for i in [2, 7]: self.board[kingRow][i] =       ChessPiece(player, PieceType.N)
-        for i in [3, 6]: self.board[kingRow][i] =       ChessPiece(player, PieceType.B)
-        self.board[kingRow][4] =                        ChessPiece(player, PieceType.Q)
-        self.board[kingRow][5] =                        ChessPiece(player, PieceType.K)
+        for i in range(1, 9): self.board[i][pawnRow] =  ChessPiece(player, PieceType.P)
+        for i in [1, 8]: self.board[i][kingRow] =       ChessPiece(player, PieceType.R)
+        for i in [2, 7]: self.board[i][kingRow] =       ChessPiece(player, PieceType.N)
+        for i in [3, 6]: self.board[i][kingRow] =       ChessPiece(player, PieceType.B)
+        self.board[4][kingRow] =                        ChessPiece(player, PieceType.Q)
+        self.board[5][kingRow] =                        ChessPiece(player, PieceType.K)

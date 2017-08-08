@@ -1,6 +1,7 @@
 """ Utility functions """
 
 import sys
+import pygame
 from color import *
 from player import *
 
@@ -48,3 +49,15 @@ def getPlayerColor(player):
     """ Returns the color the corresponds to that player """
 
     return Color.black if player == Player.BLACK else Color.white
+
+def getSprite(piece, sprites):
+    """ Select sprite from sprites corresponding to piece """
+
+    return sprites[piece.pieceType][piece.player]
+
+def centerRect(src, dest):
+    """ Centers src rect in dest rect """
+
+    x = (dest.width - src.width) / 2 + dest.x
+    y = (dest.height - src.height) / 2 + dest.y
+    return pygame.Rect((x, y, src.width, src.height))
