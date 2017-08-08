@@ -10,6 +10,13 @@ class Color:
     white =         (255, 255, 255)
     chessWhite =    (200, 200, 200)
     chessBlack =    ( 50,  50,  50)
+    background =    (  0, 100,  50)
+
+    def setChessBlack(col):
+        Color.chessBlack = col
+
+    def setChessWhite(col):
+        Color.chessWhite = col
 
     def __init__(self, r, g, b):
         if not Color.isComponentValid(r): self.data = None
