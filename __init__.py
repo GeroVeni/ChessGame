@@ -5,7 +5,7 @@ from color import Color
 from utils import *
 
 
-# Contstants
+# Constants
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
