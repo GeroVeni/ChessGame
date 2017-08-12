@@ -9,3 +9,11 @@ class PieceType:
     N = KNIGHT = 3
     R = ROOK = 4
     P = PAWN = 5
+
+def convertCharToPieceType(let):
+    if let == 'K': return PieceType.K
+    if let == 'Q': return PieceType.Q
+    if let == 'B': return PieceType.B
+    if let == 'N': return PieceType.N
+    if let == 'R': return PieceType.R
+    return PieceType.P

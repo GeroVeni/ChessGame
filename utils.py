@@ -11,7 +11,7 @@ def quitGame():
     sys.exit(0)
 
 def makeMoves(gameStr):
-    """ Creates a list on PGN notation moves 
+    """ Creates a list of PGN notation moves from a single string
     gameStr: the full string read from a pgn file """
 
     moves = []
@@ -61,3 +61,28 @@ def centerRect(src, dest):
     x = (dest.width - src.width) / 2 + dest.x
     y = (dest.height - src.height) / 2 + dest.y
     return pygame.Rect((x, y, src.width, src.height))
+
+def isUppercase(let):
+    """ Check if let is an uppercase letter """
+
+    return 'A' <= let and let <= 'Z'
+
+def isLowercase(let):
+    """ Check if let is a lowercase letter """
+
+    return 'a' <= let and let <= 'z'
+
+def isNumberChar(let):
+    """ Check if let is a numerical character """
+
+    return '0' <= let and let <= '9'
+
+def colFromFile(file):
+    """ Convert file char to column """
+
+    return ord(file) - ord('a') + 1
+
+def rowFromRank(rank):
+    """ Convert rank number to row """
+
+    return ord('9') - ord(rank)
