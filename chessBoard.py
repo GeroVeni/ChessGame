@@ -25,7 +25,7 @@ class ChessBoard:
 
         kingRow = 1
         pawnRow = 2
-        if player == Player.BLACK:
+        if player == Player.WHITE:
             kingRow = 8
             pawnRow = 7
         for i in range(1, 9): self.board[i][pawnRow] =  ChessPiece(player, PieceType.P)

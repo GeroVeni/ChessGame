@@ -3,7 +3,7 @@ from functools import reduce
 from utils import *
 
 def test_makeMoves():
-    """ Tests the PGN string parser """
+    """ Tests the PGN string splitter """
     
     randList = ["234", "efqwer", "lwjeaf", "+#+#==x", "faskdj", "dxe3=Q"]
     outList = reduce( (lambda x, y: x + y),

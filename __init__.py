@@ -38,7 +38,7 @@ def processEvents():
     for event in pygame.event.get():
         if event.type == pygame.QUIT: quitGame()
 
-def render(screen): # TO BE MOVED TO render.py
+def render(screen):
     """ Renders the canvas and the sprites """
 
     screen.fill(Color.background)
