@@ -86,3 +86,13 @@ def rowFromRank(rank):
     """ Convert rank number to row """
 
     return ord('9') - ord(rank)
+
+def clicked(prevKeys, keys, key):
+    """ Checks if key was pressed during the last update """
+
+    return keys[key] and (not prevKeys[key])
+
+def released(prevKeys, keys, key):
+    """ Checks if key was released during the last update """
+
+    return (not keys[key]) and prevKeys[key]

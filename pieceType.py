@@ -17,3 +17,11 @@ def convertCharToPieceType(let):
     if let == 'N': return PieceType.N
     if let == 'R': return PieceType.R
     return PieceType.P
+
+def convertPieceTypeToString(pieceType):
+    if pieceType == PieceType.K: return 'King'
+    if pieceType == PieceType.Q: return 'Queen'
+    if pieceType == PieceType.B: return 'Bishop'
+    if pieceType == PieceType.N: return 'Knight'
+    if pieceType == PieceType.R: return 'Rook'
+    if pieceType == PieceType.P: return 'Pawn'

@@ -1,5 +1,8 @@
 """ Utility functions and class about pieces """
 
+from player import *
+from pieceType import *
+
 class ChessPiece:
     """ Class that describes a piece """
 
@@ -9,3 +12,8 @@ class ChessPiece:
         else:
             self.player = player
             self.pieceType = pieceType
+
+    def __str__(self):
+        colorStr = 'Black' if self.player == Player.BLACK else 'White'
+        typeStr = convertPieceTypeToString(self.pieceType)
+        return "'" + colorStr + " " + typeStr + "'"

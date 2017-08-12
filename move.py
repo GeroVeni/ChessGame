@@ -28,9 +28,45 @@ class PieceMove:
         self.castles = castles
 
     def isValid(self, chessBoard, tile):
-        return True
+        """ Checks the move for validity """
+
+        piece, (x, y) = tile
+
+        if self.castles: return True # Implementation missing
+        if (x, y) == (self.x, self.y): return False
+        if self.hint.hintRow and self.hint.hintRow != y: return False
+        if self.hint.hintCol and self.hint.hintCol != x: return False
+        
+        if piece.pieceType == PieceType.K:
+            return abs(self.x - x) <= 1 and abs(self.y - y) <= 1
+        if piece.pieceType == PieceType.Q:
+            return (x == self.x or
+                y == self.y or
+                x + y == self.x + self.y or
+                x - y == self.x - self.y)
+        if piece.pieceType == PieceType.B:
+            return (x + y == self.x + self.y or
+                x - y == self.x - self.y)
+        if piece.pieceType == PieceType.N:
+            return ((abs(self.x - x) == 2 and abs(self.y - y) == 1) or
+                (abs(self.x - x) == 1 and abs(self.y - y) == 2))
+        if piece.pieceType == PieceType.R:
+            return (x == self.x or
+                y == self.y)
+        if piece.pieceType == PieceType.P:
+            sign = -1
+            pawnRow = 7
+            if piece.player == Player.BLACK:
+                sign = +1
+                pawnRow = 2
+            if self.captured: return self.y - y == sign and abs(self.x - x) == 1
+            if y == pawnRow: return sign * (self.y - y) <= 2 and self.x == x
+            return self.y - y == sign and self.x == x
+        return False
 
     def execute(self, chessBoard):
+        """ Executes the current move on the given board """
+
         pawnRow = 2
         kingRow = 1
         if self.piece.player == Player.WHITE:
@@ -38,23 +74,28 @@ class PieceMove:
             kingRow = 8
 
         if (self.castles):
-            if self.pieceType == PieceType.K:
-                chessBoard.board[kingRow][7] = chessBoard.board[kingRow][5]
-                chessBoard.board[kingRow][6] = chessBoard.board[kingRow][8]
-                chessBoard.board[kingRow][5] = None
-                chessBoard.board[kingRow][8] = None
+            if self.piece.pieceType == PieceType.K:
+                chessBoard.board[7][kingRow] = chessBoard.board[5][kingRow]
+                chessBoard.board[6][kingRow] = chessBoard.board[8][kingRow]
+                chessBoard.board[5][kingRow] = None
+                chessBoard.board[8][kingRow] = None
                 return
-            if self.pieceType == PieceType.Q:
-                chessBoard.board[kingRow][3] = chessBoard.board[kingRow][5]
-                chessBoard.board[kingRow][4] = chessBoard.board[kingRow][1]
-                chessBoard.board[kingRow][1] = None
-                chessBoard.board[kingRow][5] = None
+            if self.piece.pieceType == PieceType.Q:
+                chessBoard.board[3][kingRow] = chessBoard.board[5][kingRow]
+                chessBoard.board[4][kingRow] = chessBoard.board[1][kingRow]
+                chessBoard.board[1][kingRow] = None
+                chessBoard.board[5][kingRow] = None
                 return
 
-        for tile in [x for x in chessBoard if x[0].player == self.piece.player and x[0].pieceType == self.piece.pieceType]:
+        found = False
+        for tile in [x for x in chessBoard if x[0] and x[0].player == self.piece.player and x[0].pieceType == self.piece.pieceType]:
             if self.isValid(chessBoard, tile):
-                chessBoard.board[x][y] = chessBoard.board[tile[1][0]][tile[1][1]]
+                chessBoard.board[self.x][self.y] = chessBoard.board[tile[1][0]][tile[1][1]]
                 chessBoard.board[tile[1][0]][tile[1][1]] = None
+                found = True
+                break
+        if not found:
+            print(self.piece, self.x, self.y, self.hint, self.castles)
 
 def moveParser(player, moveStr):
     """ Converts PGN notation to PieceMove object """

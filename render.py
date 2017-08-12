@@ -39,6 +39,14 @@ class ChessBoardRenderer:
 
         self.screen = screen
 
+    def makeAxis(self, size = 10):
+        top = pygame.Rect(self.x, self.y - size, self.size, size)
+        bottom = pygame.Rect(self.x, self.y + self.size, self.size, size)
+        left = pygame.Rect(self.x - size, self.y, size, self.size)
+        right = pygame.Rect(self.x + self.size, self.y, size, self.size)
+        
+        return top, bottom, left, right
+
     def render(self, chessBoard, screen = None):
         """ Renders the chess board on the screen """
 
@@ -46,6 +54,24 @@ class ChessBoardRenderer:
             screen = self.screen
         if screen == None:
             return
+
+        axisSize = 25
+        top, bottom, left, right = self.makeAxis(axisSize)
+        font = pygame.font.Font(None, axisSize)
+        
+        for chInd in range(ord('a'), ord('i')):
+            surf = font.render(chr(chInd), False, Color.black)
+            i = chInd - ord('a')
+            subRects = [pygame.Rect(rect.x + i * self.getTileSize(), rect.y, self.getTileSize(), axisSize) for rect in [top, bottom]]
+            for rect in subRects:
+                screen.blit(surf, centerRect(surf.get_rect(), rect))
+
+        for ind in range(1, 9):
+            surf = font.render(str(9 - ind), False, Color.black)
+            i = ind - 1
+            subRects = [pygame.Rect(rect.x, rect.y + i * self.getTileSize(), axisSize, self.getTileSize()) for rect in [left, right]]
+            for rect in subRects:
+                screen.blit(surf, centerRect(surf.get_rect(), rect))
 
         for piece, (x, y) in chessBoard:
             color = Color.chessWhite if (x + y) % 2 == 0 else Color.chessBlack
